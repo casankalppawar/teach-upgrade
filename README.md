@@ -108,7 +108,7 @@ Removing first clears any stale format files so deletions in the source propagat
 - **Method fits the moment.** Guidance fades as mastery rises — instruct a novice, question someone with a scaffold, demand teach-back from an expert. Retrieval builds memory, but only once there's something to retrieve.
 - **Encode before you test.** You build the structure first (grouping, connecting, placing) — that act *is* the learning; the drilling comes after. Retrieval consolidates a memory; it can't create one.
 - **Breadth before depth.** See the map before drilling, so each piece has a place to sit.
-- **Teach-back is the bar.** Fluency in the moment is an illusion; the test is whether you can reconstruct and teach it.
+- **Teach-back is the bar — and it's the last of four.** Mastery is depth × independence × transfer × teach: can you reason *with* it (not just recall it), unprompted, in a context you weren't taught in, and explain it to someone else? Fluency at recall is the trap.
 - **Grounded, not guessed.** The shape of the field and every fact trace to real literature, never to parametric memory.
 - **Stateful by default.** Stop anytime; the map and log carry the thread.
 
