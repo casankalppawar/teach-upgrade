@@ -3,189 +3,163 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Why this design · /teach</title>
+<title>What /teach adds</title>
 <style>
   :root{
-    --bg:#0b0d12; --slide:#0f1115; --panel:#171a21; --panel2:#1d212a; --line:#2a2f3a;
-    --ink:#e7e9ee; --dim:#9aa3b2; --faint:#6b7385;
-    --accent:#6ea8fe; --good:#5ad19a; --warn:#f6c177; --bad:#f6788a; --here:#b692ff;
+    --bg:#0b0d12; --panel:#14171f; --panel2:#1b1f29; --line:#272c38;
+    --ink:#eef0f5; --dim:#aeb6c4; --faint:#717a8c;
+    --accent:#7aa2ff; --accent2:#b692ff; --good:#5ad19a; --warn:#f6c177;
   }
   *{box-sizing:border-box}
-  html,body{margin:0;background:var(--bg);color:var(--ink);
-    font:15px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:
+      radial-gradient(1100px 600px at 78% -8%, rgba(122,162,255,.12), transparent 60%),
+      radial-gradient(900px 500px at 8% 12%, rgba(182,146,255,.08), transparent 55%),
+      var(--bg);
+    color:var(--ink);
+    font:17px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    -webkit-font-smoothing:antialiased}
   h1,h2,h3,.serif{font-family:Georgia,"Times New Roman",serif;font-weight:600;letter-spacing:.2px}
-  .stage{min-height:100vh;display:grid;place-items:center;padding:34px 20px}
-  .slide{width:100%;max-width:1180px;aspect-ratio:16/9;background:
-      radial-gradient(1200px 500px at 80% -10%, rgba(110,168,254,.08), transparent 60%),
-      var(--slide);
-    border:1px solid var(--line);border-radius:18px;padding:40px 46px 34px;
-    box-shadow:0 30px 80px rgba(0,0,0,.55);display:flex;flex-direction:column;overflow:hidden}
-  @media(max-width:900px){.slide{aspect-ratio:auto}}
-  .slide + .slide{margin-top:30px}
-  .vs li .ic{color:var(--here)}
-  .vs li b.win{color:var(--good)}
+  .wrap{max-width:1060px;margin:0 auto;padding:64px 28px 72px}
 
-  .kicker{font-size:11.5px;letter-spacing:2.4px;text-transform:uppercase;color:var(--accent)}
-  h1{font-size:30px;margin:8px 0 6px;line-height:1.12}
-  .thesis{font-size:16px;color:var(--dim);max-width:900px;margin:0 0 20px}
-  .thesis b.a{color:var(--here)} .thesis b.b{color:var(--ink)}
+  /* hero */
+  .kicker{font-size:13px;letter-spacing:3px;text-transform:uppercase;color:var(--accent);font-weight:700}
+  h1{font-size:52px;line-height:1.06;margin:16px 0 18px;max-width:18ch}
+  h1 .em{color:var(--accent2)}
+  .lede{font-size:21px;line-height:1.55;color:var(--dim);max-width:60ch;margin:0 0 14px}
+  .lede b{color:var(--ink)}
+  .pills{display:flex;gap:10px;flex-wrap:wrap;margin-top:24px}
+  .pill{font-size:13.5px;color:var(--dim);border:1px solid var(--line);background:var(--panel);
+    border-radius:999px;padding:7px 14px}
+  .pill b{color:var(--ink)}
 
-  .cols{display:grid;grid-template-columns:1fr 1fr;gap:18px;flex:1;min-height:0}
-  @media(max-width:900px){.cols{grid-template-columns:1fr}}
-  .col{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:18px 18px 16px;
-    display:flex;flex-direction:column;min-height:0}
-  .col.mine{border-color:#34304a;background:
-      linear-gradient(180deg, rgba(182,146,255,.06), transparent 40%), var(--panel)}
-  .tag{display:inline-block;font-size:10.5px;letter-spacing:1.4px;text-transform:uppercase;
-    border-radius:999px;padding:3px 11px;margin-bottom:4px;align-self:flex-start}
-  .tag.mine{color:var(--here);border:1px solid #3a3550;background:rgba(182,146,255,.08)}
-  .tag.them{color:var(--dim);border:1px solid var(--line)}
-  .col h2{font-size:18px;margin:6px 0 2px}
-  .col .sub{font-size:12.5px;color:var(--faint);margin:0 0 12px}
-  ul{list-style:none;margin:0;padding:0;overflow:auto}
-  li{display:flex;gap:9px;font-size:13px;line-height:1.4;padding:5px 0;border-top:1px solid rgba(42,47,58,.6)}
-  li:first-child{border-top:0}
-  li .ic{flex:0 0 16px;font-size:13px;line-height:1.45}
-  .mine li .ic{color:var(--good)} .them li .ic{color:var(--accent)}
-  li b{color:var(--ink);font-weight:600}
-  li.gap{color:var(--faint)} li.gap .ic{color:var(--bad)}
-  li.gap b{color:var(--dim)}
+  .rule{height:1px;background:linear-gradient(90deg,var(--line),transparent);margin:56px 0 0}
+  .eyebrow{font-size:13px;letter-spacing:2.4px;text-transform:uppercase;color:var(--faint);margin:48px 0 22px}
 
-  .ladder{margin-top:12px;border:1px dashed #3a3550;border-radius:10px;padding:9px 11px;
-    background:rgba(182,146,255,.04)}
-  .ladder .lh{font-size:10.5px;letter-spacing:1.2px;text-transform:uppercase;color:var(--here);margin-bottom:7px}
-  .ladder table{width:100%;border-collapse:collapse;font-size:11.5px}
-  .ladder td{padding:2.5px 0;color:var(--dim);vertical-align:top}
-  .ladder td.s{color:var(--ink);white-space:nowrap;padding-right:10px;font-family:Georgia,serif}
-  .ladder .arrow{color:var(--faint)}
+  /* value cards */
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+  @media(max-width:760px){.grid{grid-template-columns:1fr}}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:24px 24px 22px;
+    transition:transform .15s ease, border-color .15s ease}
+  .card:hover{transform:translateY(-3px);border-color:#3b425a}
+  .card .num{font-family:Georgia,serif;font-size:15px;color:var(--accent2);font-weight:700;
+    border:1px solid #3a3550;border-radius:9px;width:34px;height:34px;display:grid;place-items:center;background:rgba(182,146,255,.08)}
+  .card h3{font-size:22px;margin:16px 0 8px;line-height:1.2}
+  .card p{margin:0;font-size:16px;color:var(--dim);line-height:1.6}
+  .card p b{color:var(--ink);font-weight:600}
 
-  footer{margin-top:18px;display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;
-    border-top:1px solid var(--line);padding-top:12px}
-  .fair{font-size:11.5px;color:var(--faint);max-width:760px}
-  .fair b{color:var(--warn)}
-  .src{font-size:10.5px;color:var(--faint);text-align:right;white-space:nowrap}
-  .src a{color:var(--dim)}
+  /* loop band */
+  .band{margin-top:24px;background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:26px 24px}
+  .band .lbl{font-size:13px;letter-spacing:2px;text-transform:uppercase;color:var(--faint);margin-bottom:18px}
+  .flow{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+  .step{flex:1 1 0;min-width:120px;background:var(--panel2);border:1px solid var(--line);border-radius:12px;
+    padding:14px 14px;text-align:center}
+  .step .s{font-family:Georgia,serif;font-size:19px;color:var(--ink)}
+  .step .d{font-size:13px;color:var(--faint);margin-top:4px}
+  .step.gate{border-color:#2f6b4a;background:rgba(90,209,154,.08)}
+  .step.gate .s{color:var(--good)}
+  .chev{color:var(--faint);font-size:20px;flex:0 0 auto}
+  @media(max-width:760px){.flow{flex-direction:column}.chev{transform:rotate(90deg)}.step{width:100%}}
+
+  /* ladder */
+  .ladder{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px}
+  .rung{flex:1 1 0;min-width:110px;border:1px solid var(--line);border-radius:11px;padding:12px 12px;background:var(--panel2)}
+  .rung .t{font-family:Georgia,serif;font-size:16px;color:var(--dim)}
+  .rung .x{font-size:12.5px;color:var(--faint);margin-top:3px}
+  .rung.goal{border-color:#3a3550;background:linear-gradient(180deg,rgba(182,146,255,.12),transparent)}
+  .rung.goal .t{color:var(--accent2);font-weight:700}
+
+  /* peers footnote */
+  .peers{margin-top:40px;border-top:1px solid var(--line);padding-top:22px;
+    display:flex;gap:22px;flex-wrap:wrap;justify-content:space-between;align-items:flex-start}
+  .peers .note{font-size:14px;color:var(--faint);max-width:70ch;line-height:1.6}
+  .peers .note b{color:var(--dim)}
+  .peers a{color:var(--dim)}
+  .sig{font-size:12.5px;color:var(--faint);white-space:nowrap}
 </style>
 </head>
 <body>
-<div class="stage">
-  <div class="slide">
-    <div class="kicker">Design rationale — /teach · 1 / 2</div>
-    <h1>Two ways to build a teaching skill</h1>
-    <p class="thesis">
-      The reference <b class="b">teach</b> skill in
-      <i>mattpocock/skills</i> optimizes the <b class="b">artifact</b> — it generates beautiful, reusable HTML lessons.
-      This one optimizes the <b class="a">dialogue and the memory</b>: which teaching method to use, on this learner,
-      right now — and a stateful map of exactly where they are across months.
-    </p>
+<div class="wrap">
 
-    <div class="cols">
-      <!-- THIS SKILL -->
-      <div class="col mine">
-        <span class="tag mine">This skill — adaptive coaching loop</span>
-        <h2>Governs the teaching, not the output</h2>
-        <p class="sub">The pedagogy is the product. Files exist to carry it across sessions.</p>
-        <ul>
-          <li><span class="ic">◆</span><span><b>Method chosen per move by a mastery ladder</b> — instruct &amp; worked examples for the brand-new, Socratic only once a scaffold exists, teach-back at the top. Operationalizes the expertise-reversal effect; it will not grill a novice.</span></li>
-          <li><span class="ic">◆</span><span><b>One breadth map = syllabus + live progress.</b> You see the whole territory and a status on every area — "what's covered, what's left" in one file.</span></li>
-          <li><span class="ic">◆</span><span><b>Stateful cold resume.</b> MAP + LOG let a fresh session pick up exactly where you stopped, weeks later.</span></li>
-          <li><span class="ic">◆</span><span><b>Recap mode.</b> A distilled RECAP spine re-fires a topic's clean logic without re-reading the Q&amp;A trail.</span></li>
-          <li><span class="ic">◆</span><span><b>Teach-back is the gate.</b> Nothing is "done" until you can explain it — including where it breaks — unprompted.</span></li>
-          <li><span class="ic">◆</span><span><b>Grounded, not guessed.</b> Breadth and every fact trace to RESOURCES; parametric guessing is banned.</span></li>
-        </ul>
-        <div class="ladder">
-          <div class="lh">The differentiator — guidance fades as mastery rises</div>
-          <table>
-            <tr><td class="s">brand-new</td><td>instruct + worked example + analogy <span class="arrow">— no Q&amp;A yet</span></td></tr>
-            <tr><td class="s">fuzzy</td><td>faded examples + contrast cases</td></tr>
-            <tr><td class="s">understands</td><td>Socratic Q&amp;A + problem-based</td></tr>
-            <tr><td class="s">fluent</td><td>generate-your-own + find-where-it-breaks</td></tr>
-            <tr><td class="s">can-teach</td><td>spaced retrieval, interleaved across sessions</td></tr>
-          </table>
-        </div>
-      </div>
-
-      <!-- MATTPOCOCK -->
-      <div class="col them">
-        <span class="tag them">mattpocock/skills · teach</span>
-        <h2>Generates durable lesson artifacts</h2>
-        <p class="sub">Knowledge / Skills / Wisdom; storage-strength over fluency-strength.</p>
-        <ul>
-          <li><span class="ic">▸</span><span><b>Authors self-contained HTML lessons</b> — one tightly-scoped concept each, Tufte typography, citations, cross-linked by anchors.</span></li>
-          <li><span class="ic">▸</span><span><b>ADR-style learning records</b> (numbered <code>0001-…md</code>) capture pivotal insights and drive what's taught next.</span></li>
-          <li><span class="ic">▸</span><span><b>Component reuse</b> — shared stylesheets, widgets, simulators reused across lessons for consistency.</span></li>
-          <li><span class="ic">▸</span><span><b>ZPD targeting</b> by reading prior records + mission, then picking the next relevant topic.</span></li>
-          <li><span class="ic">▸</span><span><b>Delegates "wisdom"</b> to real-world communities — sends you to high-reputation forums to test skills authentically.</span></li>
-          <li class="gap"><span class="ic">✕</span><span><b>Sequences by knowledge-then-skill, not by mastery level</b> — knowledge first (low difficulty), then effortful retrieval. No per-move selector keyed to where the learner sits on a ladder.</span></li>
-          <li class="gap"><span class="ic">✕</span><span><b>Stateful, but no breadth map with per-area status and no recap/revisit mode</b> — state drives the next lesson, not a cold-resume map or a distilled spine to re-fire.</span></li>
-        </ul>
-      </div>
-    </div>
-
-    <footer>
-      <div class="fair">
-        <b>Shared DNA.</b> Both rest on the same pedagogy — retrieval practice, spacing, storage-over-fluency, ZPD,
-        grounding in real sources over parametric memory, mission-first. This isn't a rebuttal of that; it's a different build on it.<br>
-        <b>The honest trade.</b> The artifact approach wins where you want lasting, shareable material — beautiful HTML lessons,
-        reusable simulators, a real-world "wisdom" loop this skill doesn't have. Choose it to <i>produce lessons</i>;
-        choose this to <i>be coached</i> — adaptively, with a memory of where you are.
-      </div>
-      <div class="src">
-        Grounded in both <code>SKILL.md</code> files, read 2026-06.<br>
-        <a href="https://github.com/mattpocock/skills">github.com/mattpocock/skills</a>
-      </div>
-    </footer>
+  <div class="kicker">/teach — adaptive mastery coach</div>
+  <h1>Most AI tutoring is <span class="em">fluent forgetting.</span></h1>
+  <p class="lede">
+    You read a flawless explanation, nod along, and retain almost none of it — recognition dressed up as knowledge.
+    <b>This flips it.</b> You do the producing, it adapts to where you are, and nothing counts as learned until you can
+    <b>teach it back</b>.
+  </p>
+  <div class="pills">
+    <span class="pill">Runs in <b>any agentic CLI</b></span>
+    <span class="pill">Your progress = <b>plain files you own</b></span>
+    <span class="pill">Stop &amp; resume <b>across months</b></span>
   </div>
 
-  <div class="slide">
-    <div class="kicker">Design rationale — /teach · 2 / 2</div>
-    <h1>Not a custom GPT. Not a content repo.</h1>
-    <p class="thesis">
-      A <b class="b">custom GPT</b> is a clever chat box with no state you own. A <b class="b">learning repo</b> is static material you have to self-drive.
-      This is the missing middle — an adaptive teaching <b class="a">process with memory</b>: it diagnoses you, picks the method, and writes your progress to disk you control.
-    </p>
-
-    <div class="cols">
-      <!-- vs custom GPT -->
-      <div class="col vs">
-        <span class="tag them">vs a custom GPT / tutor bot</span>
-        <h2>Intelligence without memory or method</h2>
-        <p class="sub">A persona in a chat window — smart, but stateless and one-note.</p>
-        <ul>
-          <li><span class="ic">→</span><span>No state you own — its memory is opaque and capped, <b class="win">not a MAP + LOG you can resume from, audit, or recap</b> weeks later.</span></li>
-          <li><span class="ic">→</span><span>No syllabus you can see — it reacts turn by turn; <b class="win">here a breadth map shows what's covered and what's left</b>, per area.</span></li>
-          <li><span class="ic">→</span><span>One-note — it explains, or it quizzes. <b class="win">Here the method is chosen by where you are</b>, with an enforced teach-back gate + transfer + calibration.</span></li>
-          <li><span class="ic">→</span><span>Parametric by default (confidently wrong). <b class="win">Here breadth and every fact trace to real sources</b>; guessing is banned.</span></li>
-          <li><span class="ic">→</span><span>Vendor-locked chat. <b class="win">Here every artifact is plain Markdown on your machine</b>, portable to any agent.</span></li>
-        </ul>
-      </div>
-
-      <!-- vs content repo -->
-      <div class="col vs">
-        <span class="tag them">vs a normal learning repo</span>
-        <h2>Material without a learner model</h2>
-        <p class="sub">Courses, awesome-lists, note dumps, flashcard decks.</p>
-        <ul>
-          <li><span class="ic">→</span><span>Static content, not coaching — a pile you must self-direct. <b class="win">This is an active harness that drives you to teach-back.</b></span></li>
-          <li><span class="ic">→</span><span>It doesn't know what <i>you</i> know — it's the same for everyone. <b class="win">This diagnoses your floor and adapts</b>, per learner.</span></li>
-          <li><span class="ic">→</span><span>Reading it is recognition — the passive-learning trap. <b class="win">This forces retrieval, encoding, and production from memory.</b></span></li>
-          <li><span class="ic">→</span><span>A README can't tell if you've mastered anything. <b class="win">The mastery ladder + teach-back can</b> — and they track it.</span></li>
-          <li><span class="ic">→</span><span>The content is the product. <b class="win">Here the <i>process</i> is the product</b> — the same skill teaches any topic.</span></li>
-        </ul>
-      </div>
+  <div class="eyebrow">What it adds</div>
+  <div class="grid">
+    <div class="card">
+      <div class="num">1</div>
+      <h3>It meets you where you are</h3>
+      <p>The teaching method is chosen by your level — <b>worked examples when it's new, hard questions once you've got a foothold, teach-back at the top.</b> It won't lecture an expert or grill a beginner on something they've never seen.</p>
     </div>
-
-    <footer>
-      <div class="fair">
-        <b>The throughline.</b> A custom GPT has intelligence but no memory or method; a content repo has material but no model of the learner.
-        This is an adaptive teaching <i>process</i> — your state, on your disk, portable across agents — whose bar is the oldest test there is: <i>can you teach it to someone else?</i>
-      </div>
-      <div class="src">
-        Positioning, not a benchmark.<br>
-        See slide 1 for the closest peer.
-      </div>
-    </footer>
+    <div class="card">
+      <div class="num">2</div>
+      <h3>Encode first, then test</h3>
+      <p>You <b>build the structure</b> — group it, connect it, map it — before you get drilled. Cramming fills a bucket with a hole in it; this patches the hole first, so what you learn actually stays.</p>
+    </div>
+    <div class="card">
+      <div class="num">3</div>
+      <h3>It remembers — for months</h3>
+      <p>A living map and log on your disk. Walk away for three weeks, come back, and it knows <b>exactly where you stopped</b>. Ask for a recap and it hands back the clean, distilled spine of any topic.</p>
+    </div>
+    <div class="card">
+      <div class="num">4</div>
+      <h3>The bar is teaching it</h3>
+      <p>Nothing is "done" until you can <b>explain it to someone else</b> — in a context you weren't taught in, including where it breaks. In-the-moment fluency is the trap; reconstruction is the proof.</p>
+    </div>
+    <div class="card">
+      <div class="num">5</div>
+      <h3>Grounded, not guessed</h3>
+      <p>The shape of the field and <b>every fact trace back to real books and papers</b> — sourced before it's taught, never filled in from the model's confident guesses.</p>
+    </div>
+    <div class="card">
+      <div class="num">6</div>
+      <h3>Yours, and portable</h3>
+      <p>Everything is <b>plain Markdown you own</b>, written to your working directory. No black-box memory, no vendor lock-in — take it to whatever agent you use.</p>
+    </div>
   </div>
+
+  <div class="band">
+    <div class="lbl">How one area moves</div>
+    <div class="flow">
+      <div class="step"><div class="s">Prime</div><div class="d">see the shape</div></div>
+      <span class="chev">›</span>
+      <div class="step"><div class="s">Encode</div><div class="d">build the structure</div></div>
+      <span class="chev">›</span>
+      <div class="step"><div class="s">Retrieve</div><div class="d">drill from memory</div></div>
+      <span class="chev">›</span>
+      <div class="step"><div class="s">Transfer</div><div class="d">apply somewhere new</div></div>
+      <span class="chev">›</span>
+      <div class="step gate"><div class="s">Teach&#8209;back</div><div class="d">the gate</div></div>
+    </div>
+    <div class="ladder">
+      <div class="rung"><div class="t">untouched</div><div class="x">not yet seen</div></div>
+      <div class="rung"><div class="t">aware</div><div class="x">heard of it</div></div>
+      <div class="rung"><div class="t">understands</div><div class="x">with prompting</div></div>
+      <div class="rung"><div class="t">fluent</div><div class="x">unprompted</div></div>
+      <div class="rung goal"><div class="t">can-teach</div><div class="x">the goal ★</div></div>
+    </div>
+  </div>
+
+  <div class="peers">
+    <div class="note">
+      <b>For the curious.</b> The closest peer is mattpocock/skills' <i>teach</i>, which generates beautiful, reusable lesson
+      artifacts — a different and worthy goal; this optimizes the live coaching and the memory of where you are. It's also
+      <b>not a custom GPT</b> (no state you own, one teaching mode) and <b>not a content repo</b> (no model of <i>you</i>).
+      Built on standard learning science — retrieval practice, spacing, cognitive load, the expertise-reversal effect.
+    </div>
+    <div class="sig">positioning, not a benchmark</div>
+  </div>
+
 </div>
 </body>
 </html>
