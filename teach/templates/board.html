@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Teach · Journey Board</title>
+<style>
+  :root{
+    --bg:#0f1115; --panel:#171a21; --panel2:#1d212a; --line:#2a2f3a;
+    --ink:#e7e9ee; --dim:#9aa3b2; --faint:#6b7385;
+    --accent:#6ea8fe; --good:#5ad19a; --warn:#f6c177; --bad:#f6788a;
+    --here:#b692ff;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;background:var(--bg);color:var(--ink);
+    font:15px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;}
+  .wrap{max-width:1040px;margin:0 auto;padding:28px 22px 60px}
+  h1,h2,h3{font-family:Georgia,"Times New Roman",serif;font-weight:600;letter-spacing:.2px}
+  header{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;flex-wrap:wrap;
+    border-bottom:1px solid var(--line);padding-bottom:18px;margin-bottom:24px}
+  header h1{margin:0 0 4px;font-size:23px}
+  .depth{display:inline-block;font-size:12px;color:var(--dim);border:1px solid var(--line);
+    border-radius:999px;padding:2px 10px;margin-top:6px}
+  .meta{color:var(--faint);font-size:12px;margin-top:8px}
+  .mastery{text-align:right;min-width:200px}
+  .mastery .pct{font-family:Georgia,serif;font-size:34px;line-height:1}
+  .mastery .lbl{font-size:11px;color:var(--faint);text-transform:uppercase;letter-spacing:1.5px}
+  .bar{height:7px;background:var(--panel2);border-radius:6px;margin-top:8px;overflow:hidden}
+  .bar > i{display:block;height:100%;background:linear-gradient(90deg,var(--accent),var(--good))}
+
+  .grid{display:grid;grid-template-columns:1fr;gap:22px}
+  @media(min-width:880px){.grid{grid-template-columns:1.15fr .85fr}}
+
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:18px 18px}
+  .card > h2{margin:0 0 14px;font-size:15px;color:var(--dim);text-transform:uppercase;letter-spacing:1.5px}
+
+  .area{padding:11px 10px;border-radius:10px;border:1px solid transparent}
+  .area + .area{margin-top:2px}
+  .area.here{background:var(--panel2);border-color:#34304a}
+  .area .top{display:flex;align-items:center;gap:12px}
+  .area .num{width:22px;height:22px;flex:0 0 22px;border-radius:6px;background:var(--panel2);
+    color:var(--faint);font-size:12px;display:grid;place-items:center}
+  .area.here .num{background:var(--here);color:#15121f;font-weight:700}
+  .area .name{flex:1;font-size:14.5px}
+  .area.done .name{color:var(--ink)}
+  .area .stat{font-size:11px;color:var(--faint);text-transform:uppercase;letter-spacing:.6px}
+  .here-tag{color:var(--here);font-size:11px;font-weight:700;margin-left:6px}
+  .pips{display:flex;gap:3px;margin-left:2px}
+  .pip{width:9px;height:9px;border-radius:2px;background:var(--panel2);border:1px solid var(--line)}
+  .pip.on{background:var(--accent);border-color:var(--accent)}
+  .pip.full{background:var(--good);border-color:var(--good)}
+  .subs{margin:9px 0 2px 34px;padding:0;list-style:none}
+  .subs li{display:flex;gap:8px;align-items:center;font-size:12.5px;color:var(--dim);padding:2px 0}
+  .subs .sdot{width:7px;height:7px;border-radius:50%;background:var(--faint);flex:0 0 7px}
+  .subs .sdot.aware{background:var(--warn)} .subs .sdot.understands{background:var(--accent)}
+  .subs .sdot.fluent{background:var(--good)} .subs .sdot.canteach{background:var(--good);box-shadow:0 0 0 2px rgba(90,209,154,.3)}
+
+  .qtype{display:inline-block;font-size:11px;letter-spacing:1px;text-transform:uppercase;
+    color:var(--here);border:1px solid #3a3550;border-radius:999px;padding:2px 10px;margin-bottom:10px}
+  .qtext{font-size:17px;line-height:1.45;font-family:Georgia,serif;margin:0 0 12px}
+  .hint{font-size:13px;color:var(--warn);background:rgba(246,193,119,.08);
+    border-left:3px solid var(--warn);padding:8px 12px;border-radius:0 8px 8px 0;margin:12px 0}
+  .opts{list-style:none;margin:14px 0 0;padding:0}
+  .opt{border:1px solid var(--line);border-radius:10px;padding:11px 13px;margin:8px 0;cursor:pointer;
+    transition:.12s;display:flex;gap:10px;align-items:flex-start}
+  .opt:hover{border-color:var(--accent);background:var(--panel2)}
+  .opt .k{font-weight:700;color:var(--faint)}
+  .opt.correct{border-color:var(--good);background:rgba(90,209,154,.10)}
+  .opt.wrong{border-color:var(--bad);background:rgba(246,120,138,.10)}
+  .opt .why{display:none;font-size:12.5px;color:var(--dim);margin-top:6px}
+  .opt.reveal .why{display:block}
+  .answer-here{margin-top:16px;font-size:13.5px;color:var(--dim);background:var(--panel2);
+    border:1px dashed var(--line);border-radius:10px;padding:12px 14px}
+  .answer-here b{color:var(--accent)}
+
+  .fb .verdict{display:inline-block;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;
+    padding:2px 10px;border-radius:999px;margin-bottom:10px}
+  .v-correct{background:rgba(90,209,154,.15);color:var(--good)}
+  .v-partial{background:rgba(246,193,119,.15);color:var(--warn)}
+  .v-wrong{background:rgba(246,120,138,.15);color:var(--bad)}
+  .fb p{margin:0 0 10px}
+  .fb ul{margin:6px 0 12px;padding-left:18px}
+  .fb li{margin:4px 0}
+  .fb b{color:var(--ink)}
+  .muted{color:var(--faint);font-size:12px}
+  footer{margin-top:30px;text-align:center;color:var(--faint);font-size:11.5px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div>
+      <h1 id="h-topic"></h1>
+      <span class="depth" id="h-depth"></span>
+      <div class="meta" id="h-meta"></div>
+    </div>
+    <div class="mastery">
+      <div class="pct" id="h-pct"></div>
+      <div class="lbl">mastery</div>
+      <div class="bar"><i id="h-bar"></i></div>
+    </div>
+  </header>
+
+  <div class="grid">
+    <section class="card">
+      <h2>The Journey</h2>
+      <div id="areas"></div>
+    </section>
+
+    <section>
+      <div class="card" id="q-card">
+        <h2>Now</h2>
+        <div id="question"></div>
+      </div>
+      <div class="card fb" id="fb-card" style="margin-top:22px">
+        <h2>Last feedback</h2>
+        <div id="feedback"></div>
+      </div>
+    </section>
+  </div>
+
+  <footer>Answer open questions in the terminal · MCQs grade in-page · refresh after each turn to see movement</footer>
+</div>
+
+<script id="state" type="application/json">
+{
+  "topic": "Software Architecture · Systems-Design Judgment",
+  "depth": "Target: teach-it mastery",
+  "updated": "2026-06-22",
+  "ladder": ["untouched","aware","understands","fluent","can-teach"],
+  "areas": [
+    {"n":1,"name":"Complexity — the thing architecture fights","status":"aware","subs":[
+      {"t":"Essential vs accidental complexity (Brooks)","s":"untouched"},
+      {"t":"Symptoms: change amplification, cognitive load, unknown unknowns","s":"aware"},
+      {"t":"Complexity ≠ lines of code","s":"aware"}]},
+    {"n":2,"name":"Decomposition & modules","status":"aware","here":true,"subs":[
+      {"t":"Information hiding — split by secret, not by step (Parnas)","s":"aware"},
+      {"t":"Deep vs shallow modules (Ousterhout)","s":"aware"},
+      {"t":"Abstraction — what to expose, what to hide","s":"untouched"},
+      {"t":"Bounded contexts (Evans)","s":"untouched"}]},
+    {"n":3,"name":"Interfaces & contracts","status":"untouched","subs":[]},
+    {"n":4,"name":"Coupling, cohesion & dependencies","status":"untouched","subs":[]},
+    {"n":5,"name":"Architecture characteristics & tradeoffs","status":"untouched","subs":[]},
+    {"n":6,"name":"Architectural styles & distributed reality","status":"untouched","subs":[]},
+    {"n":7,"name":"Failure & fault isolation","status":"untouched","subs":[]},
+    {"n":8,"name":"Testing & QA strategy","status":"untouched","subs":[]},
+    {"n":9,"name":"Design judgment & process","status":"untouched","subs":[]},
+    {"n":10,"name":"Problem space & validation","status":"untouched","subs":[]}
+  ],
+  "current": {
+    "areaN": 2,
+    "type": "apply",
+    "question": "You're building a feature: a user uploads an invoice → an AI model extracts the line items → results are saved to a database → a summary is emailed out. That's four steps. Where do you draw the module boundaries — and what is the secret each module hides?",
+    "hint": "Watch the flowchart trap: \"four steps → four modules\" is exactly what Parnas warned against. Steps aren't secrets.",
+    "options": null,
+    "answerMode": "terminal"
+  },
+  "lastFeedback": {
+    "verdict": "partial",
+    "summary": "On \"where do module boundaries go\" — you disclaimed control (\"vibe coder\"), but actually named two real decomposition criteria; you just lack the vocabulary.",
+    "bullets": [
+      "<b>\"Isolate failure\"</b> → boundaries around <b>blast radius</b>, so a fault stays contained. Legit.",
+      "<b>\"Around a tryable artifact\"</b> → that's <b>cohesion + testability</b> — one coherent job, verifiable in isolation. Also legit.",
+      "Missing the primary criterion → <b>Information hiding (Parnas, 1972)</b>: put the boundary around a <b>secret</b> (a decision likely to change), so change stays inside one module instead of rippling out. Don't split by processing steps.",
+      "Quality test → <b>deep module (Ousterhout)</b>: a narrow interface hiding a lot. Your \"tryable seam\" instinct is reaching for exactly this.",
+      "Why it matters for you: this is the judgment that lets you <b>direct the AI and review what it generates</b> — the control you said you don't have."
+    ]
+  }
+}
+</script>
+
+<script>
+  const W = {untouched:0, aware:25, understands:50, fluent:75, "can-teach":100};
+  const PIPS = {untouched:0, aware:1, understands:2, fluent:3, "can-teach":4};
+  const S = JSON.parse(document.getElementById('state').textContent);
+
+  // header
+  document.getElementById('h-topic').textContent = S.topic;
+  document.getElementById('h-depth').textContent = S.depth;
+  document.getElementById('h-meta').textContent = "Updated " + S.updated +
+    " · " + S.areas.filter(a=>a.status!=="untouched").length + " of " + S.areas.length + " areas touched";
+  const pct = Math.round(S.areas.reduce((s,a)=>s+W[a.status],0)/S.areas.length);
+  document.getElementById('h-pct').textContent = pct + "%";
+  document.getElementById('h-bar').style.width = pct + "%";
+
+  // areas
+  const ac = document.getElementById('areas');
+  S.areas.forEach(a=>{
+    const div = document.createElement('div');
+    div.className = "area" + (a.here?" here":"") + (a.status!=="untouched"?" done":"");
+    const pips = [0,1,2,3].map(i=>{
+      const on = i < PIPS[a.status];
+      const full = a.status==="can-teach";
+      return `<span class="pip ${on?(full?'full':'on'):''}"></span>`;
+    }).join("");
+    let subs = "";
+    if(a.here && a.subs.length){
+      subs = "<ul class='subs'>" + a.subs.map(su=>{
+        const cls = su.s==="can-teach"?"canteach":su.s;
+        return `<li><span class="sdot ${cls}"></span>${su.t} <span class="muted">· ${su.s}</span></li>`;
+      }).join("") + "</ul>";
+    }
+    div.innerHTML = `<div class="top">
+        <span class="num">${a.n}</span>
+        <span class="name">${a.name}${a.here?'<span class="here-tag">◀ you are here</span>':''}</span>
+        <span class="pips">${pips}</span>
+        <span class="stat">${a.status}</span>
+      </div>${subs}`;
+    ac.appendChild(div);
+  });
+
+  // question
+  const q = S.current, qc = document.getElementById('question');
+  let html = `<span class="qtype">${q.type} · area ${q.areaN}</span><p class="qtext">${q.question}</p>`;
+  if(q.hint) html += `<div class="hint">⚠ ${q.hint}</div>`;
+  if(q.options){
+    html += "<ul class='opts'>" + q.options.map((o,i)=>{
+      const k = String.fromCharCode(65+i);
+      return `<li class="opt" data-correct="${o.correct?1:0}"><span class="k">${k}</span>
+        <span><span class="ot">${o.text}</span><span class="why">${o.why||''}</span></span></li>`;
+    }).join("") + "</ul><div class='muted' id='mcq-note'>Pick one — it grades instantly. Then tell me your pick in the terminal so I can update the map.</div>";
+  } else {
+    html += `<div class="answer-here">Type your answer in the <b>terminal ↓</b> — this is an open question; I grade it and the board updates next turn.</div>`;
+  }
+  qc.innerHTML = html;
+
+  // mcq interaction
+  if(q.options){
+    qc.querySelectorAll('.opt').forEach(opt=>{
+      opt.addEventListener('click',()=>{
+        qc.querySelectorAll('.opt').forEach(o=>{
+          o.classList.add('reveal');
+          o.classList.add(o.dataset.correct==="1"?"correct":"wrong");
+        });
+      });
+    });
+  }
+
+  // feedback
+  const f = S.lastFeedback, fc = document.getElementById('feedback');
+  if(!f){ fc.innerHTML = "<p class='muted'>No feedback yet — answer the first question.</p>"; }
+  else {
+    const vcls = f.verdict==="correct"?"v-correct":f.verdict==="wrong"?"v-wrong":"v-partial";
+    fc.innerHTML = `<span class="verdict ${vcls}">${f.verdict}</span>
+      <p>${f.summary}</p>` + (f.bullets?("<ul>"+f.bullets.map(b=>`<li>${b}</li>`).join("")+"</ul>"):"");
+  }
+</script>
+</body>
+</html>

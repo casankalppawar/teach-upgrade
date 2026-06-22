@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Why this design · /teach</title>
+<style>
+  :root{
+    --bg:#0b0d12; --slide:#0f1115; --panel:#171a21; --panel2:#1d212a; --line:#2a2f3a;
+    --ink:#e7e9ee; --dim:#9aa3b2; --faint:#6b7385;
+    --accent:#6ea8fe; --good:#5ad19a; --warn:#f6c177; --bad:#f6788a; --here:#b692ff;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;background:var(--bg);color:var(--ink);
+    font:15px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;}
+  h1,h2,h3,.serif{font-family:Georgia,"Times New Roman",serif;font-weight:600;letter-spacing:.2px}
+  .stage{min-height:100vh;display:grid;place-items:center;padding:34px 20px}
+  .slide{width:100%;max-width:1180px;aspect-ratio:16/9;background:
+      radial-gradient(1200px 500px at 80% -10%, rgba(110,168,254,.08), transparent 60%),
+      var(--slide);
+    border:1px solid var(--line);border-radius:18px;padding:40px 46px 34px;
+    box-shadow:0 30px 80px rgba(0,0,0,.55);display:flex;flex-direction:column;overflow:hidden}
+  @media(max-width:900px){.slide{aspect-ratio:auto}}
+
+  .kicker{font-size:11.5px;letter-spacing:2.4px;text-transform:uppercase;color:var(--accent)}
+  h1{font-size:30px;margin:8px 0 6px;line-height:1.12}
+  .thesis{font-size:16px;color:var(--dim);max-width:900px;margin:0 0 20px}
+  .thesis b.a{color:var(--here)} .thesis b.b{color:var(--ink)}
+
+  .cols{display:grid;grid-template-columns:1fr 1fr;gap:18px;flex:1;min-height:0}
+  @media(max-width:900px){.cols{grid-template-columns:1fr}}
+  .col{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:18px 18px 16px;
+    display:flex;flex-direction:column;min-height:0}
+  .col.mine{border-color:#34304a;background:
+      linear-gradient(180deg, rgba(182,146,255,.06), transparent 40%), var(--panel)}
+  .tag{display:inline-block;font-size:10.5px;letter-spacing:1.4px;text-transform:uppercase;
+    border-radius:999px;padding:3px 11px;margin-bottom:4px;align-self:flex-start}
+  .tag.mine{color:var(--here);border:1px solid #3a3550;background:rgba(182,146,255,.08)}
+  .tag.them{color:var(--dim);border:1px solid var(--line)}
+  .col h2{font-size:18px;margin:6px 0 2px}
+  .col .sub{font-size:12.5px;color:var(--faint);margin:0 0 12px}
+  ul{list-style:none;margin:0;padding:0;overflow:auto}
+  li{display:flex;gap:9px;font-size:13px;line-height:1.4;padding:5px 0;border-top:1px solid rgba(42,47,58,.6)}
+  li:first-child{border-top:0}
+  li .ic{flex:0 0 16px;font-size:13px;line-height:1.45}
+  .mine li .ic{color:var(--good)} .them li .ic{color:var(--accent)}
+  li b{color:var(--ink);font-weight:600}
+  li.gap{color:var(--faint)} li.gap .ic{color:var(--bad)}
+  li.gap b{color:var(--dim)}
+
+  .ladder{margin-top:12px;border:1px dashed #3a3550;border-radius:10px;padding:9px 11px;
+    background:rgba(182,146,255,.04)}
+  .ladder .lh{font-size:10.5px;letter-spacing:1.2px;text-transform:uppercase;color:var(--here);margin-bottom:7px}
+  .ladder table{width:100%;border-collapse:collapse;font-size:11.5px}
+  .ladder td{padding:2.5px 0;color:var(--dim);vertical-align:top}
+  .ladder td.s{color:var(--ink);white-space:nowrap;padding-right:10px;font-family:Georgia,serif}
+  .ladder .arrow{color:var(--faint)}
+
+  footer{margin-top:18px;display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;
+    border-top:1px solid var(--line);padding-top:12px}
+  .fair{font-size:11.5px;color:var(--faint);max-width:760px}
+  .fair b{color:var(--warn)}
+  .src{font-size:10.5px;color:var(--faint);text-align:right;white-space:nowrap}
+  .src a{color:var(--dim)}
+</style>
+</head>
+<body>
+<div class="stage">
+  <div class="slide">
+    <div class="kicker">Design rationale — /teach</div>
+    <h1>Two ways to build a teaching skill</h1>
+    <p class="thesis">
+      The reference <b class="b">teach</b> skill in
+      <i>mattpocock/skills</i> optimizes the <b class="b">artifact</b> — it generates beautiful, reusable HTML lessons.
+      This one optimizes the <b class="a">dialogue and the memory</b>: which teaching method to use, on this learner,
+      right now — and a stateful map of exactly where they are across months.
+    </p>
+
+    <div class="cols">
+      <!-- THIS SKILL -->
+      <div class="col mine">
+        <span class="tag mine">This skill — adaptive coaching loop</span>
+        <h2>Governs the teaching, not the output</h2>
+        <p class="sub">The pedagogy is the product. Files exist to carry it across sessions.</p>
+        <ul>
+          <li><span class="ic">◆</span><span><b>Method chosen per move by a mastery ladder</b> — instruct &amp; worked examples for the brand-new, Socratic only once a scaffold exists, teach-back at the top. Operationalizes the expertise-reversal effect; it will not grill a novice.</span></li>
+          <li><span class="ic">◆</span><span><b>One breadth map = syllabus + live progress.</b> You see the whole territory and a status on every area — "what's covered, what's left" in one file.</span></li>
+          <li><span class="ic">◆</span><span><b>Stateful cold resume.</b> MAP + LOG let a fresh session pick up exactly where you stopped, weeks later.</span></li>
+          <li><span class="ic">◆</span><span><b>Recap mode.</b> A distilled RECAP spine re-fires a topic's clean logic without re-reading the Q&amp;A trail.</span></li>
+          <li><span class="ic">◆</span><span><b>Teach-back is the gate.</b> Nothing is "done" until you can explain it — including where it breaks — unprompted.</span></li>
+          <li><span class="ic">◆</span><span><b>Grounded, not guessed.</b> Breadth and every fact trace to RESOURCES; parametric guessing is banned.</span></li>
+        </ul>
+        <div class="ladder">
+          <div class="lh">The differentiator — guidance fades as mastery rises</div>
+          <table>
+            <tr><td class="s">brand-new</td><td>instruct + worked example + analogy <span class="arrow">— no Q&amp;A yet</span></td></tr>
+            <tr><td class="s">fuzzy</td><td>faded examples + contrast cases</td></tr>
+            <tr><td class="s">understands</td><td>Socratic Q&amp;A + problem-based</td></tr>
+            <tr><td class="s">fluent</td><td>generate-your-own + find-where-it-breaks</td></tr>
+            <tr><td class="s">can-teach</td><td>spaced retrieval, interleaved across sessions</td></tr>
+          </table>
+        </div>
+      </div>
+
+      <!-- MATTPOCOCK -->
+      <div class="col them">
+        <span class="tag them">mattpocock/skills · teach</span>
+        <h2>Generates durable lesson artifacts</h2>
+        <p class="sub">Knowledge / Skills / Wisdom; storage-strength over fluency-strength.</p>
+        <ul>
+          <li><span class="ic">▸</span><span><b>Authors self-contained HTML lessons</b> — one tightly-scoped concept each, Tufte typography, citations, cross-linked by anchors.</span></li>
+          <li><span class="ic">▸</span><span><b>ADR-style learning records</b> (numbered <code>0001-…md</code>) capture pivotal insights and drive what's taught next.</span></li>
+          <li><span class="ic">▸</span><span><b>Component reuse</b> — shared stylesheets, widgets, simulators reused across lessons for consistency.</span></li>
+          <li><span class="ic">▸</span><span><b>ZPD targeting</b> by reading prior records + mission, then picking the next relevant topic.</span></li>
+          <li><span class="ic">▸</span><span><b>Delegates "wisdom"</b> to real-world communities — sends you to high-reputation forums to test skills authentically.</span></li>
+          <li class="gap"><span class="ic">✕</span><span><b>No per-move method selector</b> — invokes ZPD but gives no rule for instruct-vs-question by mastery; nothing stops Socratic-grilling a novice.</span></li>
+          <li class="gap"><span class="ic">✕</span><span><b>No single breadth map</b> with a status per area, and <b>no explicit resume / recap phase</b> — consolidation rides on the lesson + record artifacts.</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <footer>
+      <div class="fair">
+        <b>The honest trade.</b> The artifact approach wins where you want lasting, shareable teaching material —
+        beautiful HTML lessons, interactive simulators, and a real-world "wisdom" loop this skill doesn't have.
+        Choose it to <i>produce lessons</i>; choose this to <i>be coached</i> — adaptively, with a memory of where you are.
+      </div>
+      <div class="src">
+        Grounded in both <code>SKILL.md</code> files, read 2026-06.<br>
+        <a href="https://github.com/mattpocock/skills">github.com/mattpocock/skills</a>
+      </div>
+    </footer>
+  </div>
+</div>
+</body>
+</html>

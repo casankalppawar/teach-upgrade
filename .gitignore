@@ -1,0 +1,22 @@
+# OS cruft
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor / IDE
+.vscode/
+.idea/
+*.swp
+*~
+
+# Claude Code local state
+.claude/
+
+# Personal learning workspaces — keep the demo topic, ignore everything else
+# people who clone this should learn in their OWN topics/, not commit them.
+topics/*
+!topics/big-o-notation/
+!topics/big-o-notation/**
+
+# A learner's own cross-topic notes
+/CONNECTIONS.md
