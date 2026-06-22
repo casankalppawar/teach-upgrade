@@ -125,7 +125,7 @@ It writes state to `topics/<slug>/` in the working directory regardless of host,
 This skill implements ideas from learning science, in its own framing. Worth crediting:
 
 - **Academic roots** — cognitive load theory and the expertise-reversal effect (Sweller, Kirschner, Clark); desirable difficulties and storage-vs-retrieval strength (Robert Bjork); retrieval practice and the testing effect (Roediger & Karpicke); Bloom's and SOLO taxonomies; the four-stages-of-competence model.
-- **Practitioner syntheses** — Dr. Justin Sun / [I Can Study](https://www.youtube.com/@JustinSung) for the PACER content-type router, the RAIL skill-acquisition stages, and the encoding-over-cramming, structure-building note-taking principles this skill's *encode → retrieve* loop draws on.
+- **Practitioner syntheses** — Dr. Justin Sung / [I Can Study](https://www.youtube.com/@JustinSung) for the PACER content-type router, the RAIL skill-acquisition stages, and the encoding-over-cramming, structure-building note-taking principles this skill's *encode → retrieve* loop draws on.
 - **Comparison** — Matt Pocock's [skills](https://github.com/mattpocock/skills) `teach`, the lesson-artifact design this one is contrasted against (see [docs/why-this.html](./docs/why-this.html)).
 
 Frameworks are implemented as principles in the skill's own language, not as branded drop-ins. Credit to the originators; mistakes in adaptation are ours.

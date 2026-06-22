@@ -120,7 +120,7 @@ Run this before every teaching move:
 - **Reference** (lookup detail, low conceptual weight) → spaced retrieval / flashcards; don't spend deep-processing time here.
 - **Judgment / discrimination** (telling good from bad, this from that) → contrast pairs and case method — this vs that, which and why.
 
-*(The five content types adapt the PACER reading-classification framework — Justin Sun / I Can Study — onto cognitive-load theory.)*
+*(The five content types adapt the PACER reading-classification framework — Justin Sung / I Can Study — onto cognitive-load theory.)*
 
 **Push the altitude, not just the independence.** The ladder tracks how *independently* they answer; it does not track how *deep* the thinking is. Don't let `fluent` mean only "recalls it cleanly." Within an area, escalate the cognitive level — recall → apply → **analyse / evaluate** (compare it, judge it, say what matters most and why). Aim for the higher levels early; the lower ones get built on the way up. An area isn't `can-teach` if they can recite it but not reason *with* it. (Bloom's / SOLO taxonomies.)
 
@@ -201,7 +201,7 @@ Two rules govern skill work specifically:
 - **Balance theory with practice.** New theory consumes working memory; so does performing an unhabituated skill. Stack too much new theory before the old becomes habit and you overload — the single most common reason skill-learning stalls. Gate new input on consolidation, not on the calendar.
 - **Shorten the feedback loop.** The gap between doing and learning whether it worked (the *latent learning period*) is where time is wasted. Test the validity of an approach as early as possible — not after weeks of practising the wrong thing.
 
-*(This track adapts the RAIL framework — Justin Sun / I Can Study — onto the classic four-stages-of-competence model.)*
+*(This track adapts the RAIL framework — Justin Sung / I Can Study — onto the classic four-stages-of-competence model.)*
 
 ## Grounding rule
 
