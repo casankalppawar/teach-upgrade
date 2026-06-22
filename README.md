@@ -1,6 +1,8 @@
-# `/teach` — an adaptive mastery coach for Claude Code
+# `/teach` — an adaptive mastery coach for AI coding agents
 
-A learning skill for [Claude Code](https://claude.com/claude-code). Run `/teach <topic>` and Claude assesses what you already know, maps the whole territory, then teaches you area by area — **picking the teaching method that fits where you are** — until you can **teach the topic to someone else**. Everything is written to disk, so you can stop and resume across weeks without losing the thread, and **recap any topic cleanly** later.
+A portable, **agent-agnostic** learning skill. Run `/teach <topic>` and your agent assesses what you already know, maps the whole territory, then teaches you area by area — **picking the teaching method that fits where you are** — until you can **teach the topic to someone else**. Everything is written to disk, so you can stop and resume across weeks without losing the thread, and **recap any topic cleanly** later.
+
+Under the hood it's just a structured Markdown prompt (`teach/SKILL.md`) plus the file formats it writes. Nothing in the method is tied to one vendor: [Claude Code](https://claude.com/claude-code) runs it as a turnkey `/teach` command, and any other agentic CLI (Cursor, Aider, Cline, Codex, …) can load the same file as a command, rule, or system prompt. The methodology is the product; the host is interchangeable. See [Install](#install).
 
 > **New here?** Skim a real session first: [`topics/big-o-notation/`](./topics/big-o-notation/) is a complete worked example — the [breadth map](./topics/big-o-notation/MAP.md), the [move-by-move log](./topics/big-o-notation/LOG.md), the [distilled recap](./topics/big-o-notation/RECAP.md), and a printable [cheat sheet](./topics/big-o-notation/CHEATSHEET.html) rendered from it. That folder *is* the documentation of what the skill produces.
 >
@@ -15,7 +17,7 @@ But it does not grill you with questions on things you've never seen — that's 
 ## The loop
 
 1. **Frame** — one or two questions on why you want the topic and how deep you're going.
-2. **Source** — Claude finds the canonical books, papers, and core literature for the field. The map and every fact are grounded in these, not in parametric guessing.
+2. **Source** — the agent finds the canonical books, papers, and core literature for the field. The map and every fact are grounded in these, not in parametric guessing.
 3. **Map the breadth** — the topic is decomposed into its areas and sub-areas. You see the whole landscape before drilling into any corner.
 4. **Diagnose** — a calibrated sweep to find what you already know, so no time is wasted re-teaching it.
 5. **Deepen** — area by area. First **encode** (you build the structure — group, connect, place it in the big picture), *then* **retrieve** (it drills and teach-backs the structure you built). Testing something you never encoded is drilling an empty bucket. The method is chosen per piece (see below), until you clear the teach-back bar.
@@ -56,7 +58,7 @@ Each area carries a status, tracked in its `MAP.md`:
 ```
 your-workspace/
   teach/
-    SKILL.md           ← the operational skill (what Claude follows)
+    SKILL.md           ← the operational skill (what the agent follows)
     formats/           ← the file formats the skill writes to
     templates/         ← board.html, the optional visual surface
   topics/
@@ -76,30 +78,36 @@ your-workspace/
 
 ## Install
 
-Claude Code loads skills from `~/.claude/skills/`. Copy the `teach/` folder there.
+### Claude Code (turnkey)
 
-**macOS / Linux (bash):**
+Claude Code loads skills from `~/.claude/skills/`. Copy the `teach/` folder there:
+
+**macOS / Linux:** `./install.sh`  ·  **Windows (PowerShell):** `./install.ps1`
+
+Or manually — bash:
 ```bash
-./install.sh
-# or manually:
-rm -rf ~/.claude/skills/teach
-cp -R teach ~/.claude/skills/teach
+rm -rf ~/.claude/skills/teach && cp -R teach ~/.claude/skills/teach
 ```
-
-**Windows (PowerShell):**
+PowerShell:
 ```powershell
-./install.ps1
-# or manually:
 Remove-Item -Recurse -Force "$HOME\.claude\skills\teach" -ErrorAction SilentlyContinue
 Copy-Item -Recurse "teach" "$HOME\.claude\skills\teach"
 ```
+Removing first clears stale format files so deletions propagate. **Restart the agent** — skills load at startup. Then run `/teach <topic>` from any directory; your `topics/` workspace is created wherever you run it.
 
-Removing first clears any stale format files so deletions in the source propagate. **Restart Claude Code afterwards** — skills load at startup. Then run `/teach <topic>` from any directory; your `topics/` workspace is created wherever you run it.
+### Any other agentic CLI (Cursor, Aider, Cline, Codex, …)
+
+There's no magic — `teach/SKILL.md` is a plain prompt. Wire it in whatever way your tool supports:
+
+- **As a command / rule file** — point the tool at `teach/SKILL.md` (e.g. a Cursor rule, an Aider read-only context file, a Cline custom instruction).
+- **As a system prompt** — paste `teach/SKILL.md` in, then say *"teach me &lt;topic&gt;"*.
+
+It writes state to `topics/<slug>/` in the working directory regardless of host, so resume and recap work the same everywhere. (Vendor-specific frontmatter keys like `disable-model-invocation` are simply ignored by hosts that don't use them.)
 
 ## Using it
 
 - **Start or resume a topic:** `/teach systems thinking`
-- **Resume** is automatic — if a `topics/<slug>/` already exists, Claude reads the map and log and tells you the state of play before continuing.
+- **Resume** is automatic — if a `topics/<slug>/` already exists, the agent reads the map and log and tells you the state of play before continuing.
 - **Multiple topics in flight** is the intended mode — that's what makes the cross-topic connections valuable.
 - **Two surfaces:** MD mode (default, low-token — you read and answer in `SESSION.md`) or board mode (`board.html`, a richer visual journey). Pick whichever fits.
 

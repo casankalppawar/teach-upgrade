@@ -4,7 +4,7 @@ Thanks for wanting to make `/teach` better. This skill is a set of Markdown inst
 
 ## What lives where
 
-- `teach/SKILL.md` — the operational skill. This is what Claude reads and follows. Most behaviour changes happen here.
+- `teach/SKILL.md` — the operational skill. This is what the agent reads and follows. Most behaviour changes happen here.
 - `teach/formats/*.md` — the spec for each file the skill writes (`MAP`, `LOG`, `RECAP`, `GLOSSARY`, `RESOURCES`, `MISSION`, `CONNECTIONS`). Change these when you change the *shape* of what gets written.
 - `teach/templates/board.html` — the optional visual surface.
 - `topics/big-o-notation/` — the worked-example demo. If you change a format, update this so it stays a faithful illustration.
@@ -14,7 +14,7 @@ Thanks for wanting to make `/teach` better. This skill is a set of Markdown inst
 
 1. Edit the source here.
 2. Re-install: `./install.sh` (or `./install.ps1` on Windows).
-3. Restart Claude Code.
+3. Restart the agent (Claude Code, or reload the prompt in whatever CLI you use).
 4. Run `/teach <some topic>` and put the change through a real session — including a **resume** (stop, start a new session, confirm it picks up from `MAP.md` + `LOG.md`) and a **recap** (`/teach <topic> recap`). Most regressions show up at the resume/recap boundary.
 
 ## Principles to preserve

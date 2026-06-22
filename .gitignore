@@ -9,7 +9,7 @@ desktop.ini
 *.swp
 *~
 
-# Claude Code local state
+# Agent local state (Claude Code, etc.)
 .claude/
 
 # Personal learning workspaces — keep the demo topic, ignore everything else
