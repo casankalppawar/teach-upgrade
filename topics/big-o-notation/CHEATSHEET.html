@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Big-O — cheat sheet</title>
+<style>
+  :root{
+    --ink:#1a1c22; --soft:#5b6270; --faint:#8a909c; --line:#e3e6ec; --line2:#eef0f4;
+    --bg:#fbfbfa; --card:#ffffff; --accent:#3b5bdb; --accent2:#6741d9;
+    --good:#2b8a3e; --warn:#c2700a; --bad:#c92a2a; --code:#f4f5f8;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;background:var(--bg);color:var(--ink);
+    font:13.5px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased}
+  .page{max-width:1080px;margin:0 auto;padding:30px 26px 56px}
+  h1,h2,h3{font-family:Georgia,"Times New Roman",serif;letter-spacing:.2px}
+  code,.mono{font-family:"SF Mono",ui-monospace,Menlo,Consolas,monospace}
+
+  header{border-bottom:2px solid var(--ink);padding-bottom:13px;margin-bottom:20px;
+    display:flex;justify-content:space-between;align-items:flex-end;gap:18px;flex-wrap:wrap}
+  header h1{margin:0;font-size:24px}
+  header .sub{color:var(--soft);font-size:12.5px;margin-top:4px}
+  .demo{font-size:10.5px;letter-spacing:2px;text-transform:uppercase;color:var(--accent);font-weight:700}
+  .printbtn{font-size:11px;border:1px solid var(--line);background:#fff;color:var(--soft);border-radius:7px;padding:5px 11px;cursor:pointer}
+
+  .core{background:linear-gradient(90deg,rgba(59,91,219,.07),transparent);border-left:3px solid var(--accent);
+    padding:9px 13px;border-radius:0 8px 8px 0;margin:0 0 20px;font-size:13.5px}
+  .core b{color:var(--accent2)}
+
+  table{width:100%;border-collapse:collapse;margin:0 0 6px;font-size:12.7px}
+  thead th{text-align:left;font-family:Georgia,serif;font-weight:700;font-size:11px;text-transform:uppercase;
+    letter-spacing:.8px;color:var(--faint);border-bottom:2px solid var(--line);padding:6px 8px}
+  tbody td{border-bottom:1px solid var(--line2);padding:7px 8px;vertical-align:top}
+  tbody tr:hover{background:#f7f8fb}
+  .cls{font-family:"SF Mono",ui-monospace,Menlo,Consolas,monospace;font-weight:700;color:var(--accent2);white-space:nowrap}
+  .feel{color:var(--soft)}
+
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:18px}
+  @media(max-width:760px){.grid{grid-template-columns:1fr}}
+  .card{break-inside:avoid;background:var(--card);border:1px solid var(--line);border-radius:11px;padding:13px 15px 11px;box-shadow:0 1px 2px rgba(20,22,30,.03)}
+  .card h2{margin:0 0 9px;font-size:15px}
+  ul{margin:0;padding-left:0;list-style:none}
+  li{position:relative;padding:3px 0 3px 16px;border-top:1px solid var(--line2)}
+  li:first-child{border-top:0}
+  li::before{content:"▸";position:absolute;left:0;color:var(--accent);font-size:11px;top:4px}
+  li b{color:var(--ink)}
+  pre{background:var(--code);border:1px solid var(--line);border-radius:8px;padding:9px 11px;margin:8px 0;
+    font-size:12px;overflow:auto;line-height:1.45}
+  .k{display:inline-block;font-family:"SF Mono",ui-monospace,monospace;font-weight:700;color:var(--accent2)}
+  .break{color:var(--warn)}
+  .gloss b{color:var(--ink)} .gloss{font-size:12.5px}
+  footer{margin-top:22px;border-top:1px solid var(--line);padding-top:11px;color:var(--faint);font-size:11px;
+    display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap}
+  @media print{ body{background:#fff} .page{padding:0;max-width:none} .card,pre,table{box-shadow:none}
+    .printbtn{display:none} header{border-color:#000} @page{margin:12mm} }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <header>
+    <div>
+      <div class="demo">Demo output · /teach big-o-notation</div>
+      <h1>Big-O — quick reference</h1>
+      <div class="sub">The distilled spine of the topic, as a card you revisit. (Synthetic example — shows what the skill produces.)</div>
+    </div>
+    <button class="printbtn" onclick="window.print()">⎙ Print / Save PDF</button>
+  </header>
+
+  <div class="core">
+    <b>The one idea.</b> Big-O measures how work <i>grows with input size n</i>, not seconds — because growth is a property of the algorithm, while seconds are a property of the machine. Keep only the dominant term; drop constants and lower-order terms. <code>3n² + 5n + 200 → O(n²)</code>.
+  </div>
+
+  <table>
+    <thead>
+      <tr><th>Class</th><th>What it feels like</th><th>Why it grows that way</th><th>Canonical example</th></tr>
+    </thead>
+    <tbody>
+      <tr><td class="cls">O(1)</td><td class="feel">constant</td><td>one step, regardless of n</td><td>hash-table lookup</td></tr>
+      <tr><td class="cls">O(log n)</td><td class="feel">halving</td><td>cut the problem in half each step</td><td>binary search · balanced-BST lookup</td></tr>
+      <tr><td class="cls">O(n)</td><td class="feel">linear</td><td>touch every element once</td><td>linear scan</td></tr>
+      <tr><td class="cls">O(n log n)</td><td class="feel">linearithmic</td><td>an n-pass at each of log n levels</td><td>mergesort · heapsort</td></tr>
+      <tr><td class="cls">O(n²)</td><td class="feel">quadratic</td><td>a loop inside a loop over n</td><td>nested-loop compare · bubble sort</td></tr>
+      <tr><td class="cls">O(2ⁿ)</td><td class="feel">exponential</td><td>two choices per element</td><td>generate all subsets</td></tr>
+      <tr><td class="cls">O(n!)</td><td class="feel">factorial</td><td>all orderings of n items</td><td>brute-force travelling salesman</td></tr>
+    </tbody>
+  </table>
+
+  <div class="grid">
+
+    <div class="card">
+      <h2>The three notations</h2>
+      <ul>
+        <li><span class="k">O</span> — upper bound (grows <i>at most</i> this fast). The default; states a worst-case ceiling. A loose ceiling is still true — binary search is "O(n!)", just uselessly loose.</li>
+        <li><span class="k">Ω</span> — lower bound (grows <i>at least</i> this fast).</li>
+        <li><span class="k">Θ</span> — tight bound: O and Ω at once. The honest "this is the rate."</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>Reading it off code</h2>
+      <ul>
+        <li><b>Nesting multiplies</b> · <b>sequence adds.</b> Two loops nested → n×n = O(n²). Two loops one-after-another → n+n = O(n).</li>
+        <li><b>Drop constants &amp; lower-order terms.</b> <code>3n²+5n+200 → O(n²)</code>.</li>
+        <li>Big-O is the <b>worst case</b> by convention; an early <code>return</code> changes the best case, not the O.</li>
+      </ul>
+      <pre>for a in items:        # n
+    for b in items:    # n   → nested → O(n²)
+        ...
+
+for x in items: ...    # n
+for x in items: ...    # n   → sequential → O(n)</pre>
+    </div>
+
+    <div class="card">
+      <h2 class="break">Where it breaks</h2>
+      <ul>
+        <li>The ordering is for <b>large n</b>. For small n the lines cross — a tuned O(n²) can beat a sloppy O(n log n).</li>
+        <li>A class is a ceiling on <i>growth</i>, not a verdict on <i>speed</i> — constants you dropped can decide the real winner.</li>
+        <li>Cache, memory layout, and real hardware bend the theory. Asymptotics describe the limit, not every input.</li>
+      </ul>
+    </div>
+
+    <div class="card gloss">
+      <h2>Glossary</h2>
+      <ul>
+        <li><b>Order of growth</b> — the dominant term after dropping constants; what actually decides scaling.</li>
+        <li><b>Asymptotic analysis</b> — behaviour as n → ∞, where only the order of growth survives.</li>
+        <li><b>Logarithmic</b> — rises by a fixed amount only when n <i>doubles</i> (the halving signature).</li>
+        <li><b>Linearithmic</b> — n log n; the practical floor for comparison sorting.</li>
+        <li><b>Worst case</b> — the input that makes it do the most work; what O usually describes.</li>
+      </ul>
+    </div>
+
+  </div>
+
+  <footer>
+    <div>Synthetic demo — distilled from <code>RECAP.md</code> + <code>GLOSSARY.md</code>. Grounded in CLRS Ch.3–4 · Sedgewick &amp; Wayne §1.4 · Skiena Ch.2.</div>
+    <div>Example output · /teach</div>
+  </footer>
+
+</div>
+</body>
+</html>

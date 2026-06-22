@@ -45,4 +45,4 @@ _Updated: 2026-02-14_
 
 **Where it breaks:** The ordering is for *large* n — for small n the lines cross (Area 8). And a class is a ceiling on growth, not a verdict on speed: a well-tuned O(n²) can beat a sloppy O(n log n) at modest sizes. Exponential/factorial intuition (*why* subsets are 2ⁿ) not yet locked — `aware` only.
 
-**Method that cracked it:** worked example (why binary search halves → log n) → faded to a near transfer (balanced BST) → matching drill across all five common classes.
+**Method that cracked it:** worked example (why binary search halves → log n) → faded to a near transfer (balanced BST) → learner built the ladder themselves (structure-building / encode) → matching drill across the classes (retrieve).

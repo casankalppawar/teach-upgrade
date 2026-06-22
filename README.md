@@ -2,7 +2,7 @@
 
 A learning skill for [Claude Code](https://claude.com/claude-code). Run `/teach <topic>` and Claude assesses what you already know, maps the whole territory, then teaches you area by area — **picking the teaching method that fits where you are** — until you can **teach the topic to someone else**. Everything is written to disk, so you can stop and resume across weeks without losing the thread, and **recap any topic cleanly** later.
 
-> **New here?** Skim a real session first: [`topics/big-o-notation/`](./topics/big-o-notation/) is a complete worked example — the [breadth map](./topics/big-o-notation/MAP.md), the [move-by-move log](./topics/big-o-notation/LOG.md), and the [distilled recap](./topics/big-o-notation/RECAP.md). That folder *is* the documentation of what the skill produces.
+> **New here?** Skim a real session first: [`topics/big-o-notation/`](./topics/big-o-notation/) is a complete worked example — the [breadth map](./topics/big-o-notation/MAP.md), the [move-by-move log](./topics/big-o-notation/LOG.md), the [distilled recap](./topics/big-o-notation/RECAP.md), and a printable [cheat sheet](./topics/big-o-notation/CHEATSHEET.html) rendered from it. That folder *is* the documentation of what the skill produces.
 >
 > **Coming from another teaching skill?** See [why this design](./docs/why-this.html) — a one-slide comparison with the artifact-generator approach.
 
@@ -18,7 +18,7 @@ But it does not grill you with questions on things you've never seen — that's 
 2. **Source** — Claude finds the canonical books, papers, and core literature for the field. The map and every fact are grounded in these, not in parametric guessing.
 3. **Map the breadth** — the topic is decomposed into its areas and sub-areas. You see the whole landscape before drilling into any corner.
 4. **Diagnose** — a calibrated sweep to find what you already know, so no time is wasted re-teaching it.
-5. **Deepen** — area by area, with the method chosen per piece (see below), until you clear the teach-back bar.
+5. **Deepen** — area by area. First **encode** (you build the structure — group, connect, place it in the big picture), *then* **retrieve** (it drills and teach-backs the structure you built). Testing something you never encoded is drilling an empty bucket. The method is chosen per piece (see below), until you clear the teach-back bar.
 6. **Connect** — as topics accumulate, synthesis questions link concepts across areas and across topics.
 
 One move at a time. Immediate feedback after every response. Calibrated to the edge of your ability.
@@ -35,7 +35,9 @@ The method is chosen by where you are on the mastery ladder — **guidance fades
 | fluent | generate-your-own + find-where-it-breaks |
 | can-teach (revisit) | spaced retrieval, interleaved across sessions |
 
-Plus a material axis (facts → retrieval drills; procedures → worked→faded→independent; concepts → analogy/contrast; judgment → case method) and live signals — fail twice and it drops to instruction; cruise and it raises the bar. You can also ask for a method directly ("just explain this", "stop quizzing me") and it switches.
+Plus a **content-type axis** — it matches the process to what the information *is*: procedural → practice early; analogical → build the analogy then critique it; conceptual → structure it before questioning; evidence → store now, use later; reference → flashcards/spaced; judgment → contrast pairs and cases. And live signals — fail twice and it drops to instruction; cruise and it raises the bar. You can also ask for a method directly ("just explain this", "stop quizzing me") and it switches.
+
+**Knowledge vs skill.** The mastery ladder measures *understanding*. When you're learning a *performance* skill (coding, a language, an instrument), it switches to a four-stage acquisition track — Relevance → Awareness → Iteration → Lifelong — where mistakes-fast and *consistency before speed* are the rules, and it balances new theory against practice so you never overload.
 
 ## Recap / revisit
 
@@ -66,6 +68,7 @@ your-workspace/
       RESOURCES.md     ← the trusted sources everything is grounded in
       MISSION.md       ← optional: why you're learning it and target depth
       SESSION.md       ← the live MD-mode surface (or board.html for the visual mode)
+      CHEATSHEET.html  ← optional: a printable reference card rendered from RECAP + GLOSSARY
   CONNECTIONS.md       ← cross-topic links, built as you learn more topics
 ```
 
@@ -103,10 +106,21 @@ Removing first clears any stale format files so deletions in the source propagat
 ## Design principles
 
 - **Method fits the moment.** Guidance fades as mastery rises — instruct a novice, question someone with a scaffold, demand teach-back from an expert. Retrieval builds memory, but only once there's something to retrieve.
+- **Encode before you test.** You build the structure first (grouping, connecting, placing) — that act *is* the learning; the drilling comes after. Retrieval consolidates a memory; it can't create one.
 - **Breadth before depth.** See the map before drilling, so each piece has a place to sit.
 - **Teach-back is the bar.** Fluency in the moment is an illusion; the test is whether you can reconstruct and teach it.
 - **Grounded, not guessed.** The shape of the field and every fact trace to real literature, never to parametric memory.
 - **Stateful by default.** Stop anytime; the map and log carry the thread.
+
+## Influences & credits
+
+This skill implements ideas from learning science, in its own framing. Worth crediting:
+
+- **Academic roots** — cognitive load theory and the expertise-reversal effect (Sweller, Kirschner, Clark); desirable difficulties and storage-vs-retrieval strength (Robert Bjork); retrieval practice and the testing effect (Roediger & Karpicke); Bloom's and SOLO taxonomies; the four-stages-of-competence model.
+- **Practitioner syntheses** — Dr. Justin Sun / [I Can Study](https://www.youtube.com/@JustinSung) for the PACER content-type router, the RAIL skill-acquisition stages, and the encoding-over-cramming, structure-building note-taking principles this skill's *encode → retrieve* loop draws on.
+- **Comparison** — Matt Pocock's [skills](https://github.com/mattpocock/skills) `teach`, the lesson-artifact design this one is contrasted against (see [docs/why-this.html](./docs/why-this.html)).
+
+Frameworks are implemented as principles in the skill's own language, not as branded drop-ins. Credit to the originators; mistakes in adaptation are ours.
 
 ## License
 

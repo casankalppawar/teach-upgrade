@@ -22,6 +22,7 @@ Each topic gets its own directory under `topics/<topic-slug>/` in the current wo
 - `RESOURCES.md` — the trusted books, papers, and core literature the breadth and the facts are grounded in. Format: [formats/RESOURCES-FORMAT.md](./formats/RESOURCES-FORMAT.md).
 - `MISSION.md` — *optional, light.* Why the user wants this and the depth they're aiming for. Format: [formats/MISSION-FORMAT.md](./formats/MISSION-FORMAT.md).
 - `board.html` — the user-facing **journey board** (display-driven mode; see [Surface](#surface--how-the-user-sees-and-answers)). Copied from [templates/board.html](./templates/board.html); only its embedded `<script id="state">` JSON is edited each turn.
+- `CHEATSHEET.html` — *optional.* A printable, scannable **reference card** rendered from `RECAP.md` + `GLOSSARY.md` — the distilled spine as a one-pager the user keeps and revisits. Reference docs are what people actually return to (lessons rarely are), so offer to generate one once a topic has a few `understands`+ areas. Build only when asked or when it clearly earns its place.
 
 At the **workspace root** (not inside a topic):
 
@@ -57,7 +58,11 @@ Sweep across the breadth with calibrated questions to find what they already kno
 
 ### 5. Deepen (area by area, method by method)
 
-Pick the next area by zone of proximal development — the one they're ready for, given the floor. Then, **for every teaching move, run the [method selector](#method-selection--the-core-rule)** to choose how to teach this piece, to this learner, right now. The method changes as their mastery of the piece rises — you will often instruct first, then example, then question, then demand teach-back, all within one sub-area.
+Pick the next area by zone of proximal development — the one they're ready for, given the floor. **Prime it first:** before drilling, show how this area sits in the map and what it connects to, so the learner has a skeleton to hang detail on. A 30-second preview of the shape beats cold depth.
+
+Then run the **encode → retrieve** rhythm — not retrieval alone. Retrieval consolidates a memory that *already exists*; it does nothing for one that was never built. So first make the learner **build the structure**: group the pieces, name the relationships, place each against the big picture. The *deciding* — what groups with what, what's central, where this fits — **is** the encoding. Only once that structure exists do you drill it with retrieval and teach-back. Testing an un-encoded topic is drilling an empty bucket.
+
+**For every move, run the [method selector](#method-selection--the-core-rule)** to choose how to teach this piece, to this learner, right now. The method changes as their mastery of the piece rises — you will often instruct, then example, then have them *structure* it, then question, then demand teach-back, all within one sub-area.
 
 Drive each area until the user clears the **teach-back bar**: they can explain it, unprompted, clearly enough to teach a smart peer. Only then mark `can-teach` — and write its distilled logic to `RECAP.md`.
 
@@ -84,7 +89,10 @@ You have a full kit. Each entry: what it is, and the signal that it's the right 
 - **Problem-based** — drop a real problem first, supply concepts as they're needed to crack it. *For learners who are bored by theory and learn by doing.*
 - **Generate-your-own** — they produce a fresh example or apply the method in their own domain. *Strong evidence the method has landed generatively, not just been recognised.*
 - **Teach-back / Feynman** — they explain it to a skeptical peer, simply, unprompted. *The mastery gate.* Gaps expose themselves the moment they have to say it out loud.
-- **Spaced retrieval** — re-test old material while teaching new, across sessions. *Always on in the background, regardless of the active method.*
+- **Structure-building (encode)** — the learner groups the pieces, names the relationships, and places them against the big picture — building a *network*, not linear notes and not a long A→B→C chain. *The core encoding move; do it before retrieval on any conceptual material.* The judgment (what groups with what, what's central) is where the learning happens. Push lateral grouping over chains — a chain fails like a game of telephone, where one forgotten link drops everything after it.
+- **Critique-the-analogy** — after an analogy lands, the learner names exactly where it holds and where it breaks. *Turns a borrowed picture into owned understanding* — the same "name where it breaks" discipline, applied to the mapping itself.
+- **Reconstruct, never copy** — the learner redraws the diagram or rebuilds the structure from memory, then checks it. *Reconstruction is retrieval; copying is recognition* — and recognition feels like learning without being it.
+- **Spaced retrieval** — re-test old material while teaching new, across sessions. *Always on in the background, regardless of the active method.* Schedule the **first** retrieval within ~24h of first learning — the forgetting curve is steepest then; space out after.
 - **Find-where-it-breaks** — they name the failure modes and edge cases. *The last 10% that separates `fluent` from `can-teach`.*
 
 ## Method selection — the core rule
@@ -101,11 +109,15 @@ Run this before every teaching move:
 | `fluent` (unprompted) | **Generate-your-own + find-where-it-breaks.** |
 | `can-teach` (revisit) | **Spaced retrieval + interleaved application.** Keep it alive. |
 
-**Override by material type:**
-- **Facts / terms** → spaced retrieval and mnemonics; skip heavy instruction.
-- **Procedures / skills** → worked → faded → independent practice, in that order.
-- **Concepts / models** → analogy and contrast cases *before* any questioning.
-- **Judgment / discrimination** → contrast pairs and case method (this vs that — which, and why).
+**Override by material type — match the process to what the information *is*:**
+- **Procedural** (how to do something) → practice early; worked → faded → independent. Apply it ASAP; don't sit memorising the steps.
+- **Analogical** (maps onto something they already know) → build the analogy, then *critique* it — where it holds, where it breaks.
+- **Conceptual** (what / why; lives in a network) → structure-building and contrast cases *before* any questioning.
+- **Evidence** (facts or cases that support a concept) → store it now, *rehearse later by using it* (a problem, an explanation) — not by re-reading.
+- **Reference** (lookup detail, low conceptual weight) → spaced retrieval / flashcards; don't spend deep-processing time here.
+- **Judgment / discrimination** (telling good from bad, this from that) → contrast pairs and case method — this vs that, which and why.
+
+*(The five content types adapt the PACER reading-classification framework — Justin Sun / I Can Study — onto cognitive-load theory.)*
 
 **Override by signal (what just happened):**
 - **Failed or confused twice** → drop one guidance level. Stop asking; show a concrete worked walk-through, then re-test. (Three Socratic passes on a confused learner is the failure this skill exists to prevent — switch to instruction sooner.)
@@ -146,6 +158,8 @@ In both modes: **the teaching content lives in the file, not as a wall of text i
 ## Teaching discipline
 
 - **One move at a time.** One example, one question, one prompt — then wait. Stacking moves breaks the feedback loop.
+- **Gate new material on consolidation.** Don't introduce the next concept until the last one is structured and used. Piling on new theory before it beds down is the commonest cause of a stalled learner — that's cognitive overload, not slowness. More practice and use earns more new input, never the reverse.
+- **Prefer relational questions.** "How does X relate to / drive Y?" beats "define X" — the relational question builds the network *and* subsumes the fact. Reserve isolated-fact questions for `Reference` material.
 - **Method fits the moment.** Run the [selector](#method-selection--the-core-rule) every move. Don't default to Q&A; don't default to lecturing. The right method is a function of where they are.
 - **Close every loop immediately.** After each response: verdict (right / partly / wrong), the correct-and-deeper answer, then the next move. Immediate feedback is the engine.
 - **Calibrate to the edge of their ability.** Hard enough to require real thought, not so hard it crushes, not so easy it's recognition. That edge is where learning happens — and it's also how you tell whether to raise or drop guidance.
@@ -165,6 +179,23 @@ Every area in `MAP.md` carries one status:
 - `can-teach` — can explain it to someone who doesn't know it, including where it breaks. **The goal.**
 
 A topic is mastered when every area the mission cares about reaches `can-teach`. The ladder is also the input to the method selector — status is *what* you've covered and *how* you should teach the next rep.
+
+*(This ladder measures **knowledge**. When the mission is a performance skill, track it on the parallel path in [When the goal is a skill, not knowledge](#when-the-goal-is-a-skill-not-knowledge).)*
+
+## When the goal is a skill, not knowledge
+
+The mastery ladder above measures *understanding*. A motor or performance skill — coding, a language, an instrument, a clinical technique — is acquired differently: you can understand it perfectly and still not *do* it consistently. When the mission is a skill, track it on this parallel four-stage path and pick actions to match the stage:
+
+1. **Relevance** — they don't yet know what matters or where to start. *Action: explore + challenge assumptions.* No performance yet; progress = discovering which variables matter.
+2. **Awareness** — they attempt it and fail, often. *Action: make mistakes fast, reflect on each.* Mistakes are the progress here — surface them quickly, don't avoid them. Get feedback; you can't fix what you can't see.
+3. **Iteration** — they can do it, but slowly and inconsistently. *Action: varied practice + adjust.* **Consistency before speed** — pushing speed before accuracy just multiplies errors. Practise across varied conditions and fine-tune.
+4. **Lifelong** — it's a habit; it now takes effort to do it *wrong*. *Action: maintain.* Unused skills decay back down the stages.
+
+Two rules govern skill work specifically:
+- **Balance theory with practice.** New theory consumes working memory; so does performing an unhabituated skill. Stack too much new theory before the old becomes habit and you overload — the single most common reason skill-learning stalls. Gate new input on consolidation, not on the calendar.
+- **Shorten the feedback loop.** The gap between doing and learning whether it worked (the *latent learning period*) is where time is wasted. Test the validity of an approach as early as possible — not after weeks of practising the wrong thing.
+
+*(This track adapts the RAIL framework — Justin Sun / I Can Study — onto the classic four-stages-of-competence model.)*
 
 ## Grounding rule
 
