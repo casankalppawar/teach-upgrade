@@ -21,6 +21,9 @@
     border:1px solid var(--line);border-radius:18px;padding:40px 46px 34px;
     box-shadow:0 30px 80px rgba(0,0,0,.55);display:flex;flex-direction:column;overflow:hidden}
   @media(max-width:900px){.slide{aspect-ratio:auto}}
+  .slide + .slide{margin-top:30px}
+  .vs li .ic{color:var(--here)}
+  .vs li b.win{color:var(--good)}
 
   .kicker{font-size:11.5px;letter-spacing:2.4px;text-transform:uppercase;color:var(--accent)}
   h1{font-size:30px;margin:8px 0 6px;line-height:1.12}
@@ -67,7 +70,7 @@
 <body>
 <div class="stage">
   <div class="slide">
-    <div class="kicker">Design rationale — /teach</div>
+    <div class="kicker">Design rationale — /teach · 1 / 2</div>
     <h1>Two ways to build a teaching skill</h1>
     <p class="thesis">
       The reference <b class="b">teach</b> skill in
@@ -130,6 +133,56 @@
       <div class="src">
         Grounded in both <code>SKILL.md</code> files, read 2026-06.<br>
         <a href="https://github.com/mattpocock/skills">github.com/mattpocock/skills</a>
+      </div>
+    </footer>
+  </div>
+
+  <div class="slide">
+    <div class="kicker">Design rationale — /teach · 2 / 2</div>
+    <h1>Not a custom GPT. Not a content repo.</h1>
+    <p class="thesis">
+      A <b class="b">custom GPT</b> is a clever chat box with no state you own. A <b class="b">learning repo</b> is static material you have to self-drive.
+      This is the missing middle — an adaptive teaching <b class="a">process with memory</b>: it diagnoses you, picks the method, and writes your progress to disk you control.
+    </p>
+
+    <div class="cols">
+      <!-- vs custom GPT -->
+      <div class="col vs">
+        <span class="tag them">vs a custom GPT / tutor bot</span>
+        <h2>Intelligence without memory or method</h2>
+        <p class="sub">A persona in a chat window — smart, but stateless and one-note.</p>
+        <ul>
+          <li><span class="ic">→</span><span>No state you own — its memory is opaque and capped, <b class="win">not a MAP + LOG you can resume from, audit, or recap</b> weeks later.</span></li>
+          <li><span class="ic">→</span><span>No syllabus you can see — it reacts turn by turn; <b class="win">here a breadth map shows what's covered and what's left</b>, per area.</span></li>
+          <li><span class="ic">→</span><span>One-note — it explains, or it quizzes. <b class="win">Here the method is chosen by where you are</b>, with an enforced teach-back gate + transfer + calibration.</span></li>
+          <li><span class="ic">→</span><span>Parametric by default (confidently wrong). <b class="win">Here breadth and every fact trace to real sources</b>; guessing is banned.</span></li>
+          <li><span class="ic">→</span><span>Vendor-locked chat. <b class="win">Here every artifact is plain Markdown on your machine</b>, portable to any agent.</span></li>
+        </ul>
+      </div>
+
+      <!-- vs content repo -->
+      <div class="col vs">
+        <span class="tag them">vs a normal learning repo</span>
+        <h2>Material without a learner model</h2>
+        <p class="sub">Courses, awesome-lists, note dumps, flashcard decks.</p>
+        <ul>
+          <li><span class="ic">→</span><span>Static content, not coaching — a pile you must self-direct. <b class="win">This is an active harness that drives you to teach-back.</b></span></li>
+          <li><span class="ic">→</span><span>It doesn't know what <i>you</i> know — it's the same for everyone. <b class="win">This diagnoses your floor and adapts</b>, per learner.</span></li>
+          <li><span class="ic">→</span><span>Reading it is recognition — the passive-learning trap. <b class="win">This forces retrieval, encoding, and production from memory.</b></span></li>
+          <li><span class="ic">→</span><span>A README can't tell if you've mastered anything. <b class="win">The mastery ladder + teach-back can</b> — and they track it.</span></li>
+          <li><span class="ic">→</span><span>The content is the product. <b class="win">Here the <i>process</i> is the product</b> — the same skill teaches any topic.</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <footer>
+      <div class="fair">
+        <b>The throughline.</b> A custom GPT has intelligence but no memory or method; a content repo has material but no model of the learner.
+        This is an adaptive teaching <i>process</i> — your state, on your disk, portable across agents — whose bar is the oldest test there is: <i>can you teach it to someone else?</i>
+      </div>
+      <div class="src">
+        Positioning, not a benchmark.<br>
+        See slide 1 for the closest peer.
       </div>
     </footer>
   </div>
